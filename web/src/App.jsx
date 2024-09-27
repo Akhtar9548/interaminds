@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
-import "./App.css";
+//import "./App.css";
 import { AuthProvider } from "./utils/authContext";
 import LandingPage from "./pages/landing/landingPage";
 import LoginPage from "./pages/login";
@@ -13,6 +13,7 @@ import CommonHeader from "@/Components/Header";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DonationScreen from "./pages/DonationTraking/DonationScreen";
 
 const BlankLayout = () => {
   return (
@@ -65,6 +66,10 @@ const App = () => {
           path: "*",
           element: <PageNotImplemented />,
         },
+        {
+          path: "/DonationTraking",
+          element: <DonationScreen/>,
+        }
       ],
     },
   ]);
