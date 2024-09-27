@@ -24,6 +24,7 @@ const DonationScreen = () => {
   };
 
   return (
+    <>
     <div className="max-w-md mx-auto p-4 bg-white rounded-md shadow-md">
       <h2 className="text-lg font-bold mb-4">Donation Tracker</h2>
       <form
@@ -86,6 +87,7 @@ const DonationScreen = () => {
         Total Donations: {donations.reduce((acc, curr) => acc + curr.amount, 0)}rs
       </p>
     </div>
+    </>
   );
 };
 
