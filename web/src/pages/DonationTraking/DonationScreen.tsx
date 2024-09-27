@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "./DonationScreen.css"
+import "./DonationScreen.css";
 
 interface Donation {
   name: string;
@@ -9,13 +9,13 @@ interface Donation {
 const DonationScreen = () => {
   const [donations, setDonations] = useState<Donation[]>([]);
   const [name, setName] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState<number | ''>('');
 
   const handleAddDonation = () => {
     if (name && amount > 0) {
       setDonations([...donations, { name, amount }]);
       setName('');
-      setAmount(0);
+      setAmount('');
     }
   };
 
@@ -26,29 +26,43 @@ const DonationScreen = () => {
   return (
     <div className="max-w-md mx-auto p-4 bg-white rounded-md shadow-md">
       <h2 className="text-lg font-bold mb-4">Donation Tracker</h2>
-      <form className="flex flex-col mb-4">
-        <label className="text-sm font-medium mb-2">Name:</label>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleAddDonation();
+        }}
+        className="flex flex-col mb-4"
+      >
+        <label htmlFor="name" className="text-sm font-medium mb-2">
+          Name:
+        </label>
         <input
+          id="name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="p-2 border border-gray-300 rounded-md mb-4"
+          placeholder="Enter your name"
         />
-        <label className="text-sm font-medium mb-2">Amount:</label>
+        <label htmlFor="amount" className="text-sm font-medium mb-2">
+          Amount:
+        </label>
         <input
+          id="amount"
           type="number"
           value={amount}
           onChange={(e) => setAmount(Number(e.target.value))}
           className="p-2 border border-gray-300 rounded-md mb-4"
+          placeholder="Enter donation amount"
         />
         <button
-          type="button"
-          onClick={handleAddDonation}
+          type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md"
         >
           Add Donation
         </button>
       </form>
+
       <ul className="list-none mb-4">
         {donations.map((donation, index) => (
           <li
